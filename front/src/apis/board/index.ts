@@ -51,7 +51,7 @@ export const putBoardRequest = async (receptionNumber: number | string, requestB
         .then(requestHandler<ResponseDto>)
         .catch(requestErrorHandler)
     return result;
-}
+};
 
 // function: Q&A 게시물 조회수 증가 API 함수 
 export const increaseViewCountRequest = async (receptionNumber: number | string, accessToken: string) => {

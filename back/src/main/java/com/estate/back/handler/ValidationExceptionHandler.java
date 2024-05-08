@@ -1,10 +1,12 @@
 package com.estate.back.handler;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.estate.back.dto.response.ResponseDto;
 
@@ -24,6 +26,14 @@ public class ValidationExceptionHandler {
     ) {
         exception.printStackTrace();
         return ResponseDto.validationFailed();
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<ResponseDto> notFoundExceptionHandler(
+        Exception exception
+    ) {
+        exception.printStackTrace();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDto("NF", "Not Found."));
     }
     
 }
