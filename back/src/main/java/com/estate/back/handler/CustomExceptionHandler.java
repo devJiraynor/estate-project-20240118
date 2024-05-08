@@ -12,7 +12,7 @@ import com.estate.back.dto.response.ResponseDto;
 
 // Request의 데이터 유효성 검사에서 발생하는 예외 처리
 @RestControllerAdvice
-public class ValidationExceptionHandler {
+public class CustomExceptionHandler {
 
     // RequestBody의 데이터 유효성 검사 중 발생하는 예외 핸들링
     // - MethodArgumentNotValidException : 유효하지 않은 데이터
@@ -29,11 +29,12 @@ public class ValidationExceptionHandler {
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<ResponseDto> notFoundExceptionHandler(
+    public ResponseEntity<ResponseDto> noHandlerFoundExceptionHandler(
         Exception exception
     ) {
         exception.printStackTrace();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseDto("NF", "Not Found."));
+        return ResponseDto.notFound();
     }
+
     
 }
